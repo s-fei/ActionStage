@@ -26,22 +26,29 @@
 // THE SOFTWARE.
 
 import Foundation
+import CoreGraphics
+import UIKit
 
 public protocol LHWWatcher: class {
     var actionHandler: LHWHandler? { get }
     
     func actorCompleted(status: LHWActionStageStatus, path: String, result: Any?)
-    func actorReportedProgress(path: String, progress: Float)
+    func actorReportedProgress(path: String, progress: CGFloat)
     func actionStageResourceDispatched(path: String, resource: Any?, arguments: Any?)
     func actionStageActionRequested(_ action: String, options: [String: Any]?)
     func actorMessageReceived(path: String, messageType: String?, message: Any?)
 }
 
 public extension LHWWatcher {
+    
+    var actionHandler: LHWHandler? {
+        return LHWHandler(delegate: self)
+    }
+    
     func actorCompleted(status: LHWActionStageStatus, path: String, result: Any?) {
     }
     
-    func actorReportedProgress(path: String, progress: Float) {
+    func actorReportedProgress(path: String, progress: CGFloat) {
     }
     
     func actionStageResourceDispatched(path: String, resource: Any?, arguments: Any?) {
@@ -52,4 +59,5 @@ public extension LHWWatcher {
     
     func actorMessageReceived(path: String, messageType: String?, message: Any?) {
     }
+    
 }

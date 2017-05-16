@@ -8,16 +8,16 @@
 
 import UIKit
 
-let MGReloadPath = "/mg/newcell/@"
+let MGReloadPagePath = "/mg/app/reload"
 
 class MGReloadActor: LHWActor {
     override class func genericPath() -> String? {
-        return MGReloadPath
+        return MGReloadPagePath
     }
     
     override func execute(options: [String: Any]?) {
         ActionStageInstance.dispatchResource(path: path, resource: nil, arguments: options)
-        ActionStageInstance.actionCompleted(self.path)
+        ActionStageInstance.actionCompleted(path, result: nil)
     }
     
     deinit {

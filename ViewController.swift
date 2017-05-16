@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         actionHandler = LHWHandler(delegate: self)
-        ActionStageInstance.watchForPath(MGReloadPath, watcher: self)
+        ActionStageInstance.watchForPath(MGReloadPagePath, watcher: self)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -36,6 +36,19 @@ class ViewController: UIViewController {
 extension ViewController:LHWWatcher{
     func actionStageResourceDispatched(path: String, resource: Any?, arguments: Any?){
         print("ViewController path:\(path)  arguments:\(arguments ?? "")")
+    }
+    
+    func actorCompleted(status: LHWActionStageStatus, path: String, result: Any?) {
+        print("我完成啦")
+    }
+    
+    func actorMessageReceived(path: String, messageType: String?, message: Any?) {
+        if path == MGReloadPagePath {
+            print("这是哪里来的")
+            LHWDispatchOnMainThread {
+                
+            }
+        }
     }
 }
 
